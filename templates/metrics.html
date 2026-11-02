@@ -1,0 +1,42 @@
+﻿{% extends "base.html" %}
+{% block title %}Performa Model - DiabetesKNN{% endblock %}
+{% block content %}
+<section class="container my-5">
+  <div class="mb-4">
+    <div class="section-eyebrow">Evaluasi</div>
+    <h1 class="section-title">Performa Model KNN</h1>
+    <p class="section-lead">Hasil evaluasi pada 20% data uji yang dipisahkan saat training.</p>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-value">{{ metrics.akurasi }}%</div><div class="stat-label">Akurasi</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-value">{{ metrics.presisi }}%</div><div class="stat-label">Presisi</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-value">{{ metrics.recall }}%</div><div class="stat-label">Recall</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat-card"><div class="stat-value">K={{ metrics.k }}</div><div class="stat-label">Tetangga</div></div></div>
+  </div>
+
+  <div class="row g-4 mt-3">
+    <div class="col-lg-6">
+      <div class="card p-4 h-100">
+        <h2 class="h5 mb-3">Confusion Matrix</h2>
+        <table class="table mb-0">
+          <tr><th></th><th>Prediksi Diabetes</th><th>Prediksi Tidak</th></tr>
+          <tr><th>Aktual Diabetes</th><td><strong>{{ metrics.cm.TP }}</strong> <span class="text-muted">(TP)</span></td><td><strong>{{ metrics.cm.FN }}</strong> <span class="text-muted">(FN)</span></td></tr>
+          <tr><th>Aktual Tidak</th><td><strong>{{ metrics.cm.FP }}</strong> <span class="text-muted">(FP)</span></td><td><strong>{{ metrics.cm.TN }}</strong> <span class="text-muted">(TN)</span></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card p-4 h-100">
+        <h2 class="h5 mb-3">Detail Dataset</h2>
+        <table class="table mb-0">
+          <tr><th style="color:var(--muted);font-weight:500;">Data Latih</th><td><strong>{{ metrics.n_train }}</strong></td></tr>
+          <tr><th style="color:var(--muted);font-weight:500;">Data Uji</th><td><strong>{{ metrics.n_test }}</strong></td></tr>
+          <tr><th style="color:var(--muted);font-weight:500;">Total Data</th><td><strong>{{ metrics.n_total }}</strong></td></tr>
+          <tr><th style="color:var(--muted);font-weight:500;">Nilai K</th><td><strong>{{ metrics.k }}</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,88 @@
+﻿{% extends "base.html" %}
+{% block title %}Klasifikasi - DiabetesKNN{% endblock %}
+{% block content %}
+<section class="container my-5">
+  <div class="mb-4">
+    <div class="section-eyebrow">Klasifikasi</div>
+    <h1 class="section-title">Prediksi Risiko Diabetes</h1>
+    <p class="section-lead">Pilih metode input di bawah ini.</p>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="form-shell">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#manual">Input Manual</button></li>
+          <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#csv">Upload CSV</button></li>
+        </ul>
+
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="manual">
+            <form method="POST" action="{{ url_for('main.predict') }}">
+              <div class="row g-3">
+                {% set fields = [
+                  ('pregnancies','Jumlah Kehamilan','0','0-20'),
+                  ('glucose','Kadar Glukosa','120','mg/dL'),
+                  ('bloodPressure','Tekanan Darah','70','mmHg'),
+                  ('skinThickness','Ketebalan Kulit','20','mm'),
+                  ('insulin','Kadar Insulin','80','mu U/ml'),
+                  ('bmi','BMI','25.0','kg/m²'),
+                  ('dpf','Diabetes Pedigree','0.5','0-3'),
+                  ('age','Usia','30','tahun')
+                ] %}
+                {% for name, label, placeholder, unit in fields %}
+                <div class="col-md-6">
+                  <label class="form-label">{{ label }}</label>
+                  <div class="input-group">
+                    <input type="number" step="any" name="{{ name }}" class="form-control"
+                           placeholder="{{ placeholder }}" required>
+                    <span class="input-group-text" style="background:#f1f5f9;border:1.5px solid var(--line);border-left:0;border-radius:0 12px 12px 0;font-size:.8rem;color:var(--muted);">{{ unit }}</span>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <button type="submit" class="btn btn-custom mt-4 w-100 justify-content-center">
+                Prediksi Sekarang →
+              </button>
+            </form>
+          </div>
+
+          <div class="tab-pane fade" id="csv">
+            <form method="POST" action="{{ url_for('main.predict') }}" enctype="multipart/form-data">
+              <div class="mb-3">
+                <label class="form-label">File CSV Dataset Uji</label>
+                <input type="file" name="uji_csv" accept=".csv" class="form-control" required>
+                <div class="form-text mt-2">
+                  File harus memiliki 8 kolom fitur ditambah kolom <code>Outcome</code>.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-custom w-100 justify-content-center">
+                Evaluasi CSV →
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="info-panel">
+        <h3>Tips Input</h3>
+        <ul>
+          <li>Glukosa &gt; 126 mg/dL mengindikasikan diabetes</li>
+          <li>BMI normal 18.5 – 24.9</li>
+          <li>Tekanan darah normal 90/60 – 120/80</li>
+          <li>Nilai 0 pada kolom medis akan diganti median</li>
+        </ul>
+
+        <h3>Metode</h3>
+        <ul>
+          <li>K-Nearest Neighbor (K=5)</li>
+          <li>StandardScaler pada semua fitur</li>
+          <li>Dataset PIMA Indians (768 baris)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

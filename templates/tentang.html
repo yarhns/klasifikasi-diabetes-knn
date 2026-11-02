@@ -1,0 +1,54 @@
+﻿{% extends "base.html" %}
+{% block title %}Tentang KNN - DiabetesKNN{% endblock %}
+{% block content %}
+<section class="container my-5">
+  <div class="mb-4">
+    <div class="section-eyebrow">Algoritma</div>
+    <h1 class="section-title">Tentang K-Nearest Neighbor</h1>
+    <p class="section-lead">
+      KNN adalah algoritma klasifikasi berbasis instance yang memprediksi kelas data baru
+      berdasarkan mayoritas kelas dari <em>K</em> tetangga terdekat.
+    </p>
+  </div>
+
+  <div class="row g-4 mt-3">
+    <div class="col-md-3">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3 class="step-title">Standarisasi</h3>
+        <p class="step-desc">Setiap fitur di-scale dengan StandardScaler agar jarak tidak didominasi fitur berskala besar.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3 class="step-title">Jarak Euclidean</h3>
+        <p class="step-desc">Hitung jarak antara data uji dan seluruh data latih di ruang fitur.</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3 class="step-title">Ambil K Terdekat</h3>
+        <p class="step-desc">Pilih K=5 data latih dengan jarak terkecil sebagai "tetangga".</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3 class="step-title">Voting Mayoritas</h3>
+        <p class="step-desc">Kelas dengan suara terbanyak menjadi prediksi akhir.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-4 mt-4">
+    <h2 class="h5 mb-3">Dataset</h2>
+    <p class="mb-0 text-muted">
+      Menggunakan <strong>PIMA Indians Diabetes Dataset</strong> — 768 rekam medis
+      dengan 8 fitur (Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI,
+      DiabetesPedigreeFunction, Age) dan label biner Outcome.
+    </p>
+  </div>
+</section>
+{% endblock %}

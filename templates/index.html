@@ -1,0 +1,164 @@
+﻿{% extends "base.html" %}
+{% block content %}
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-eyebrow">Machine Learning &middot; Akurasi {{ metrics.akurasi or 0 }}%</div>
+        <h1 class="hero-title">
+          Deteksi Dini <span class="accent">Risiko Diabetes</span> dengan KNN
+        </h1>
+        <p class="hero-desc">
+          Masukkan 8 parameter medis atau unggah dataset CSV — sistem akan
+          memprediksi potensi diabetes menggunakan algoritma K-Nearest Neighbor
+          yang telah dilatih pada 768 rekam medis.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="{{ url_for('main.form') }}" class="btn btn-custom">
+            Mulai Klasifikasi →
+          </a>
+          <a href="{{ url_for('main.metrics_page') }}" class="btn btn-ghost">
+            Lihat Performa
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-mockup">
+          <div class="mockup-card">
+            <span class="mockup-badge">Contoh Hasil</span>
+            <div class="mockup-label">Prediksi Pasien</div>
+            <div class="mockup-result">
+              <div class="mockup-result-icon">✓</div>
+              <div>
+                <div class="mockup-result-title">Tidak Berpotensi Diabetes</div>
+                <div class="mockup-result-sub">K=5 &middot; 4 dari 5 tetangga sepakat</div>
+              </div>
+            </div>
+            <div class="mockup-grid">
+              <div class="mockup-item">
+                <div class="mockup-item-label">Glukosa</div>
+                <div class="mockup-item-value">120 mg/dL</div>
+              </div>
+              <div class="mockup-item">
+                <div class="mockup-item-label">BMI</div>
+                <div class="mockup-item-value">25.0</div>
+              </div>
+              <div class="mockup-item">
+                <div class="mockup-item-label">Tekanan Darah</div>
+                <div class="mockup-item-value">70 mmHg</div>
+              </div>
+              <div class="mockup-item">
+                <div class="mockup-item-label">Usia</div>
+                <div class="mockup-item-value">30 tahun</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+{% if metrics %}
+<section class="section-pad">
+  <div class="container">
+    <div class="text-center mb-4">
+      <div class="section-eyebrow">Performa Model</div>
+      <h2 class="section-title">Akurasi yang Bisa Diandalkan</h2>
+      <p class="section-lead mx-auto">
+        Dievaluasi pada data uji terpisah dengan stratifikasi kelas.
+      </p>
+    </div>
+    <div class="row g-3 mt-4">
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-value">{{ metrics.akurasi }}%</div>
+          <div class="stat-label">Akurasi</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-value">{{ metrics.presisi }}%</div>
+          <div class="stat-label">Presisi</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-value">{{ metrics.recall }}%</div>
+          <div class="stat-label">Recall</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="stat-card">
+          <div class="stat-value">{{ metrics.n_total }}</div>
+          <div class="stat-label">Data Latih</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ============ CARA KERJA ============ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="text-center mb-4">
+      <div class="section-eyebrow">Cara Kerja</div>
+      <h2 class="section-title">Tiga Langkah Sederhana</h2>
+    </div>
+    <div class="row g-4 mt-3">
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3 class="step-title">Masukkan Data</h3>
+          <p class="step-desc">
+            Isi 8 parameter medis seperti kadar glukosa, tekanan darah, BMI,
+            dan insulin — atau unggah file CSV berisi banyak pasien sekaligus.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3 class="step-title">Proses KNN</h3>
+          <p class="step-desc">
+            Sistem menstandarisasi fitur dengan StandardScaler, lalu menghitung
+            jarak Euclidean terhadap seluruh data training untuk menemukan
+            tetangga terdekat.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3 class="step-title">Dapatkan Hasil</h3>
+          <p class="step-desc">
+            Lihat prediksi akhir beserta tabel tetangga terdekat yang digunakan
+            — transparan, bisa diverifikasi, dan sesuai perhitungan manual.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section-pad">
+  <div class="container">
+    <div class="card p-5 text-center" style="background: linear-gradient(135deg, #0f766e, #14b8a6); border: none;">
+      <h2 class="mb-3" style="color:#fff;">Siap Mencoba?</h2>
+      <p class="mb-4" style="color: rgba(255,255,255,.9); max-width: 32rem; margin: 0 auto;">
+        Mulai klasifikasi sekarang — gratis, cepat, dan tanpa perlu registrasi.
+      </p>
+      <div>
+        <a href="{{ url_for('main.form') }}" class="btn btn-ghost">Mulai Klasifikasi →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

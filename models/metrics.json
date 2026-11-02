@@ -1,0 +1,25 @@
+{
+  "akurasi": 75.32,
+  "presisi": 66.0,
+  "recall": 61.11,
+  "n_train": 614,
+  "n_test": 154,
+  "n_total": 768,
+  "k": 5,
+  "cm": {
+    "TP": 33,
+    "FN": 21,
+    "FP": 17,
+    "TN": 83
+  },
+  "features": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ]
+}

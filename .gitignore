@@ -1,0 +1,32 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Model files (regenerate via ml.train)
+models/*.pkl
+
+# Uploads
+uploads/*
+!uploads/.gitkeep
+
+# Notebook
+.ipynb_checkpoints/
+
+# Environment
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
