@@ -275,9 +275,8 @@ Proyek ini menggunakan lisensi **MIT** — bebas digunakan untuk pembelajaran.
 
 **[Nama Anda]**
 
-- GitHub: [@username](https://github.com/username)
-- LinkedIn: [linkedin.com/in/username](https://linkedin.com/in/username)
-- Email: [email@example.com](mailto:email@example.com)
+- GitHub: [@yarhns](https://github.com/yarhns)
+- Email: [haensdear@gmail.com](mailto:haensdear@gmail.com)
 
 ---
 
